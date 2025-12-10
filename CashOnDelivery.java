@@ -8,6 +8,12 @@ package com.mycompany.project;
  *
  * @author johnh
  */
-public class CashOnDelivery {
-    
+public class CashOnDelivery implements PaymentMethod {
+
+    @Override
+    public boolean pay(double amount) {
+        System.out.println("Cash on Delivery selected.");
+        return true;
+    }
 }
+
