@@ -1,64 +1,33 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.ecommerceproject;
 
-package com.mycompany.jproject;
-
-import java.util.ArrayList;
+/**
+ *
+ * @author Eng. Youssef
+ */
 import java.util.List;
 
 public class Order {
-
-    private final int orderId;
-    private Customer customer;
+    private User user;
     private List<FurnitureItem> items;
-    private double totalPrice;
-    private String status;
+    private boolean paid = false;
 
-    public Order(int orderId, Customer customer) {
-        this.orderId = orderId;
-        this.customer = customer;
-        this.items = new ArrayList<>();
-        this.totalPrice = 0;
-        this.status = "Pending"; 
+    public Order(User user, List<FurnitureItem> items) {
+        this.user = user;
+        this.items = items;
     }
 
-    public void addItem(FurnitureItem item) {
-        items.add(item);
-        calculateTotal();
-        updateStatus(); 
+    public User getUser() { return user; }
+
+    public double getTotalAmount() {
+        double sum = 0;
+        for (FurnitureItem i : items) sum += i.getPrice();
+        return sum;
     }
 
-    public void removeItem(int id) {
-        items.removeIf(i -> i.getItemId() == id);
-        calculateTotal();
-        updateStatus(); // update status automatically
-    }
-
-    public double calculateTotal() {
-        totalPrice = 0;
-        for (FurnitureItem item : items) {
-            totalPrice += item.getPrice();
-        }
-        return totalPrice;
-    }
-
-    // Automatically updates the status based on current state
-    private void updateStatus() {
-        if (totalPrice >= 0) {
-            status = "Pending";
-        } else{
-            status = "Processing";
-        }
-    }
-
-    public void printOrder() {
-        System.out.println("Order #" + orderId);
-        System.out.println("Customer: " + customer.getName());
-        System.out.println("Items:");
-
-        for (FurnitureItem item : items) {
-            System.out.println("- " + item.getName() + " : " + item.getPrice());
-        }
-
-        System.out.println("Total Price: " + totalPrice);
-        System.out.println("Status: " + status);
-    }
+    public void setPaid(boolean paid) { this.paid = paid; }
+    public boolean isPaid() { return paid; }
 }

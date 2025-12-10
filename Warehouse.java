@@ -8,9 +8,9 @@ package com.mycompany.ecommerceproject;
  *
  * @author Eng. Youssef
  */
-public class User {
-    private String name;
-    public User(String name) { this.name = name; }
-    public String getName() { return name; }
+public class Warehouse {
+    private String location;
+    public Warehouse(String location) { this.location = location; }
+    public String getLocation() { return location; }
 }
 
